@@ -1,0 +1,72 @@
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <h2 class="h4 mb-3">Registrar una idea</h2>
+
+    <form [formGroup]="formulario" (ngSubmit)="guardar()">
+
+      <!-- Campo para el título -->
+      <div class="mb-3">
+        <label for="titulo" class="form-label">
+          Título de la idea:
+        </label>
+
+        <input
+          id="titulo"
+          type="text"
+          class="form-control"
+          formControlName="titulo"
+          placeholder="Ejemplo: Mejorar biblioteca"
+        >
+
+        <div
+          class="text-danger mt-1"
+          *ngIf="
+            formulario.get('titulo')?.touched &&
+            formulario.get('titulo')?.hasError('required')
+          "
+        >
+          El título es obligatorio.
+        </div>
+
+        <div
+          class="text-danger mt-1"
+          *ngIf="
+            formulario.get('titulo')?.touched &&
+            formulario.get('titulo')?.hasError('minimoPalabras')
+          "
+        >
+          El título debe tener al menos dos palabras.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">
+          Descripción:
+        </label>
+
+        <input
+          id="descripcion"
+          type="text"
+          class="form-control"
+          formControlName="descripcion"
+          placeholder="Explica tu propuesta"
+        >
+
+        <div
+          class="text-danger mt-1"
+          *ngIf="
+            formulario.get('descripcion')?.touched &&
+            formulario.get('descripcion')?.hasError('required')
+          "
+        >
+          La descripción es obligatoria.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Agregar idea
+      </button>
+
+    </form>
+  </div>
+</div>

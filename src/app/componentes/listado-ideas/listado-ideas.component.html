@@ -1,0 +1,51 @@
+<h1 class="text-primary mb-3">Mis ideas</h1>
+
+<p>
+  Registra tus propuestas y vota por las que más te interesen.
+</p>
+
+<!-- Componente hijo: formulario -->
+<app-formulario-idea
+  (ideaCreada)="recibirIdea($event)"
+></app-formulario-idea>
+
+<h2 class="h4 mb-3">Ideas registradas</h2>
+
+<ul class="list-group">
+  <li
+    *ngFor="let idea of ideas$ | async"
+    class="list-group-item"
+  >
+    <h3 class="h5">{{ idea.titulo }}</h3>
+
+    <p>{{ idea.descripcion }}</p>
+
+    <p>Votos: {{ idea.votos }}</p>
+
+    <div class="d-flex gap-2 flex-wrap">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="votarPositivo(idea.id)"
+      >
+        A favor +1
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="votarNegativo(idea.id)"
+      >
+        En contra -1
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="eliminar(idea.id)"
+      >
+        Eliminar
+      </button>
+    </div>
+  </li>
+</ul>
